@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tacos a Vapor Marus</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--or:#F5A623;--ord:#E08B00;--red:#C0392B;--ye:#FFE135;--cr:#FFF8EE;--tx:#1A1A1A;--mu:#6B4F2A;--gn:#27AE60;--bd:rgba(0,0,0,0.08);--wh:#fff}
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito',sans-serif;background:var(--cr);color:var(--tx);min-height:100vh}
+  .hero{background:var(--or);position:relative;overflow:hidden;padding:2rem 1.5rem 1.75rem;text-align:center}
+  .hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:repeating-conic-gradient(var(--ye) 0deg 10deg,transparent 10deg 20deg);opacity:.25;border-radius:50%}
+  .logo-circle{width:130px;height:130px;border-radius:50%;background:var(--wh);border:5px solid var(--ye);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto .75rem;box-shadow:0 4px 20px rgba(0,0,0,.15);overflow:hidden;padding:8px;position:relative;z-index:2}
+  .logo-top{font-family:'Fredoka One',cursive;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--tx);margin-bottom:2px}
+  .logo-sun{width:56px;height:28px;background:var(--ye);border-radius:56px 56px 0 0;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:2px}
+  .logo-badge{background:var(--red);color:var(--wh);font-family:'Fredoka One',cursive;font-size:18px;letter-spacing:2px;padding:2px 14px;border-radius:4px;border:2px solid var(--wh)}
+  .logo-phone{font-size:9px;color:var(--gn);font-weight:700;margin-top:3px}
+  .hero-title{font-family:'Fredoka One',cursive;font-size:clamp(22px,6vw,32px);color:var(--wh);text-shadow:2px 3px 0 rgba(0,0,0,.2);position:relative;z-index:2;line-height:1.1}
+  .hero-title span{color:var(--ye)}
+  .hero-chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:1rem;position:relative;z-index:2}
+  .chip{background:rgba(255,255,255,.25);color:var(--wh);font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;border:1.5px solid rgba(255,255,255,.5)}
+  .info-bar{background:var(--red);padding:.75rem 1.25rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+  .info-item{color:var(--wh);font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px}
+  .container{max-width:640px;margin:0 auto}
+  .sec-hdr{display:flex;align-items:center;gap:10px;padding:1.5rem 1.25rem .75rem}
+  .sec-hdr::after{content:'';flex:1;height:2px;background:var(--or);border-radius:99px;opacity:.3}
+  .sec-ttl{font-family:'Fredoka One',cursive;font-size:18px;color:var(--red);white-space:nowrap}
+  .promo-card{margin:0 1.25rem;background:var(--ye);border-radius:14px;padding:1rem 1.25rem;display:flex;align-items:center;gap:14px;border:2px solid var(--ord)}
+  .promo-emoji{font-size:40px;flex-shrink:0}
+  .pt{font-family:'Fredoka One',cursive;font-size:20px;color:var(--red)}
+  .pp{font-family:'Fredoka One',cursive;font-size:32px;color:var(--tx)}
+  .pd{font-size:12px;color:var(--mu);font-weight:600}
+  .pi{font-size:11px;background:var(--red);color:var(--wh);display:inline-block;padding:2px 10px;border-radius:99px;font-weight:700;margin-top:5px}
+  .orden-card{margin:0 1.25rem;background:var(--wh);border-radius:14px;border:2px solid var(--or);padding:1rem 1.25rem}
+  .orden-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .orden-ttl{font-family:'Fredoka One',cursive;font-size:17px;color:var(--red)}
+  .orden-price{background:var(--or);color:var(--wh);font-size:13px;font-weight:800;padding:3px 12px;border-radius:99px}
+  .orden-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .orden-tag{background:var(--cr);border:1.5px solid var(--or);border-radius:99px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--mu)}
+  .orden-nota{font-size:12px;color:var(--mu);font-weight:600;background:#FFF8EE;border-radius:8px;padding:8px 12px;border-left:3px solid var(--or);margin-bottom:10px;line-height:1.5}
+  .orden-btn{width:100%;padding:10px;background:var(--or);color:var(--wh);border:none;border-radius:10px;font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;transition:background .15s}
+  .orden-btn:hover{background:var(--ord)}
+  .orden-btn.activa{background:var(--gn)}
+  .comp-box{margin:1rem 1.25rem 0;background:var(--wh);border-radius:12px;border:1.5px solid var(--bd);padding:1rem 1.25rem}
+  .comp-ttl{font-family:'Fredoka One',cursive;font-size:15px;color:var(--ord);margin-bottom:8px}
+  .comp-grid{display:flex;flex-wrap:wrap;gap:6px}
+  .comp-tag{background:var(--cr);border:1px solid var(--bd);border-radius:99px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--mu)}
+  .items-wrap{background:var(--wh);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+  .item{display:flex;align-items:center;gap:12px;padding:12px 1.25rem;border-bottom:1px solid var(--bd);transition:background .15s}
+  .item:last-child{border-bottom:none}
+  .item:hover{background:#FFFBF5}
+  .item-em{font-size:24px;width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--cr);border-radius:10px;border:1px solid var(--bd)}
+  .item-body{flex:1}
+  .item-name{font-weight:800;font-size:14px;color:var(--tx)}
+  .item-desc{font-size:12px;color:var(--mu);margin-top:1px}
+  .item-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+  .price{font-family:'Fredoka One',cursive;font-size:17px;color:var(--red)}
+  .qty-ctrl{display:flex;align-items:center;gap:6px}
+  .qty-btn{width:28px;height:28px;border-radius:50%;border:2px solid var(--or);background:var(--wh);color:var(--ord);font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+  .qty-btn:hover{background:var(--or);color:var(--wh)}
+  .qty-btn:active{transform:scale(.9)}
+  .qty-num{font-size:15px;font-weight:800;min-width:20px;text-align:center}
+  .tgl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 1.25rem}
+  .tgl-btn{padding:12px;border:2px solid var(--bd);border-radius:10px;background:var(--wh);cursor:pointer;text-align:center;transition:all .15s;font-family:'Nunito',sans-serif}
+  .tgl-btn .ti{font-size:22px;display:block;margin-bottom:3px}
+  .tgl-btn .tl{font-size:13px;font-weight:800;color:var(--tx)}
+  .tgl-btn .ts{font-size:11px;color:var(--mu)}
+  .tgl-btn.ao{border-color:var(--or);background:#FFF8EE}
+  .tgl-btn.ao .tl{color:var(--red)}
+  .tgl-btn.ag{border-color:var(--gn);background:#F0FBF4}
+  .tgl-btn.ag .tl{color:var(--gn)}
+  .trans-box{margin:.75rem 1.25rem 0;background:#F0FBF4;border:2px solid var(--gn);border-radius:12px;padding:1rem 1.25rem;display:none}
+  .trans-box.vis{display:block}
+  .trans-ttl{font-family:'Fredoka One',cursive;font-size:15px;color:var(--gn);margin-bottom:10px}
+  .trans-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px}
+  .trans-row:last-of-type{border-bottom:none}
+  .trans-lbl{color:var(--mu);font-weight:600}
+  .trans-val{font-weight:800;color:var(--tx);font-size:14px}
+  .trans-copy{background:var(--gn);color:var(--wh);border:none;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif}
+  .trans-nota{margin-top:10px;font-size:11px;color:var(--gn);font-weight:700;background:rgba(39,174,96,.1);padding:6px 10px;border-radius:8px}
+  .qr-box{margin:.75rem 1.25rem 0;background:#FFF8EE;border:2px solid var(--or);border-radius:12px;padding:1rem 1.25rem;display:none}
+  .qr-box.vis{display:block}
+  .qr-ttl{font-family:'Fredoka One',cursive;font-size:15px;color:var(--ord);margin-bottom:6px}
+  .qr-desc{font-size:12px;color:var(--mu);font-weight:600;line-height:1.6}
+  .campo{padding:1.25rem 1.25rem 0}
+  .campo label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:8px}
+  .campo input,.campo textarea{width:100%;padding:11px 14px;border:2px solid var(--bd);border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;color:var(--tx);background:var(--wh);outline:none;transition:border-color .15s}
+  .campo input:focus,.campo textarea:focus{border-color:var(--or)}
+  .campo input::placeholder,.campo textarea::placeholder{color:#C4A882;font-weight:400}
+  .campo textarea{resize:vertical;min-height:70px}
+  .campos-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;padding:0 1.25rem}
+  .campos-row .campo{padding-left:0;padding-right:0}
+  .resumen{margin:1.25rem 1.25rem 0;background:var(--red);border-radius:14px;padding:1.25rem;display:none}
+  .resumen.vis{display:block}
+  .res-ttl{font-family:'Fredoka One',cursive;font-size:15px;color:var(--ye);margin-bottom:10px}
+  .res-line{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.9);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.1);font-weight:600}
+  .res-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:2px solid rgba(255,255,255,.2)}
+  .res-total span:first-child{font-family:'Fredoka One',cursive;font-size:16px;color:var(--wh)}
+  .res-total span:last-child{font-family:'Fredoka One',cursive;font-size:26px;color:var(--ye)}
+  .wa-wrap{padding:1.25rem 1.25rem 3rem}
+  .wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;background:#25D366;color:var(--wh);border:none;border-radius:12px;font-family:'Fredoka One',cursive;font-size:18px;cursor:pointer;transition:background .15s,transform .1s}
+  .wa-btn:hover{background:#1ebe5d}
+  .wa-btn:active{transform:scale(.98)}
+  .wa-btn.dis{background:#ccc;cursor:not-allowed;transform:none}
+  .wa-ic{width:26px;height:26px;fill:var(--wh);flex-shrink:0}
+  .wa-hint{text-align:center;font-size:12px;color:var(--mu);margin-top:10px;font-weight:600}
+  footer{background:var(--tx);text-align:center;padding:1.5rem;font-size:12px;color:rgba(255,255,255,.45);font-weight:600;line-height:1.8}
+  footer a{color:var(--or);text-decoration:none}
+  .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--red);color:var(--wh);font-size:13px;font-weight:700;padding:10px 22px;border-radius:99px;border:2px solid var(--ye);opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:999}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:400px){.campos-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="logo-circle">
+      <div class="logo-top">Tacos a Vapor</div>
+      <div class="logo-sun">🌮</div>
+      <div class="logo-badge">MARUS</div>
+      <div class="logo-phone">📞 81 24 46 39 48</div>
+    </div>
+    <div class="hero-title">Tacos a Vapor<br><span>Marus</span></div>
+    <div class="hero-chips">
+      <div class="chip">🕐 Lun–Sáb a partir de las 7 a.m.</div>
+      <div class="chip">📍 Av Nuevo León 801, Apodaca</div>
+    </div>
+    <div class="hero-chips" style="margin-top:6px">
+      <div class="chip">🛵 Entrega a domicilio</div>
+      <div class="chip">🏃 Recoger en local</div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <div class="info-item">✅ Tacos de maíz</div>
+    <div class="info-item">✅ Incluye complementos</div>
+    <div class="info-item">✅ Orden desde 1 taco</div>
+  </div>
+
+  <div class="sec-hdr"><div class="sec-ttl">🌽 Tacos de Maíz</div></div>
+  <div class="promo-card">
+    <div class="promo-emoji">💰</div>
+    <div>
+      <div class="pt">Orden especial</div>
+      <div class="pp">$50 <span style="font-size:14px;color:var(--mu)">/ orden</span></div>
+      <div class="pd">Incluye varios tacos a elegir</div>
+      <div class="pi">★ Incluye complementos</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:.5rem"><div class="sec-ttl">⚡ Orden Surtida</div></div>
+  <div class="orden-card">
+    <div class="orden-hdr">
+      <div class="orden-ttl">🌮 1 orden lista para ti</div>
+      <div class="orden-price">$50</div>
+    </div>
+    <div class="orden-tags">
+      <span class="orden-tag">1× Chicharrón</span>
+      <span class="orden-tag">2× Deshebrada</span>
+      <span class="orden-tag">1× Papa</span>
+      <span class="orden-tag">1× Frijol</span>
+    </div>
+    <div class="orden-nota">💬 ¿De acuerdo con este surtido o quieres cambiar algún guiso? Puedes indicar cambios en el campo de notas al hacer tu pedido.</div>
+    <button class="orden-btn" id="orden-btn" onclick="toggleOrden()">➕ Agregar orden surtida</button>
+  </div>
+
+  <div class="comp-box">
+    <div class="comp-ttl">🥗 Complementos incluidos</div>
+    <div class="comp-grid">
+      <span class="comp-tag">Repollo</span>
+      <span class="comp-tag">Cueritos</span>
+      <span class="comp-tag">Cebolla con zanahoria</span>
+      <span class="comp-tag">Salsa verde</span>
+      <span class="comp-tag">Limón</span>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:.5rem"><div class="sec-ttl">🌮 Elige tus tacos</div></div>
+  <div class="items-wrap">
+    <div class="item">
+      <div class="item-em">🫘</div>
+      <div class="item-body"><div class="item-name">Taco de Frijol</div><div class="item-desc">Frijoles refritos en tortilla de maíz al vapor</div></div>
+      <div class="item-right"><div class="price">$10 c/u</div><div class="qty-ctrl"><button class="qty-btn" onclick="change(0,-1)">−</button><span class="qty-num" id="q0">0</span><button class="qty-btn" onclick="change(0,1)">+</button></div></div>
+    </div>
+    <div class="item">
+      <div class="item-em">🥓</div>
+      <div class="item-body"><div class="item-name">Taco de Chicharrón</div><div class="item-desc">Chicharrón en salsa, tortilla de maíz al vapor</div></div>
+      <div class="item-right"><div class="price">$10 c/u</div><div class="qty-ctrl"><button class="qty-btn" onclick="change(1,-1)">−</button><span class="qty-num" id="q1">0</span><button class="qty-btn" onclick="change(1,1)">+</button></div></div>
+    </div>
+    <div class="item">
+      <div class="item-em">🥔</div>
+      <div class="item-body"><div class="item-name">Taco de Papa</div><div class="item-desc">Papa guisada, tortilla de maíz al vapor</div></div>
+      <div class="item-right"><div class="price">$10 c/u</div><div class="qty-ctrl"><button class="qty-btn" onclick="change(2,-1)">−</button><span class="qty-num" id="q2">0</span><button class="qty-btn" onclick="change(2,1)">+</button></div></div>
+    </div>
+    <div class="item">
+      <div class="item-em">🍖</div>
+      <div class="item-body"><div class="item-name">Taco de Deshebrada</div><div class="item-desc">Carne deshebrada guisada, tortilla de maíz al vapor</div></div>
+      <div class="item-right"><div class="price">$10 c/u</div><div class="qty-ctrl"><button class="qty-btn" onclick="change(3,-1)">−</button><span class="qty-num" id="q3">0</span><button class="qty-btn" onclick="change(3,1)">+</button></div></div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:.5rem"><div class="sec-ttl">🚀 ¿Cómo lo recibes?</div></div>
+  <div class="tgl-grid">
+    <div class="tgl-btn ao" id="btn-dom" onclick="setE('dom')"><span class="ti">🛵</span><span class="tl">A domicilio</span><span class="ts">Te lo llevamos</span></div>
+    <div class="tgl-btn" id="btn-loc" onclick="setE('loc')"><span class="ti">🏃</span><span class="tl">Recoger</span><span class="ts">Pasar al local</span></div>
+  </div>
+
+  <div class="qr-box vis" id="qr-box">
+    <div class="qr-ttl">🏘️ ¿Tu domicilio es en privada?</div>
+    <div class="qr-desc">Si tu colonia o fraccionamiento tiene acceso controlado, por favor envía tu <strong>código QR o clave de acceso</strong> junto con tu pedido por WhatsApp para que el repartidor pueda ingresar sin problema. 🙏</div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:.5rem"><div class="sec-ttl">💳 Método de pago</div></div>
+  <div class="tgl-grid">
+    <div class="tgl-btn ag" id="btn-ef" onclick="setP('ef')"><span class="ti">💵</span><span class="tl">Efectivo</span><span class="ts">Al momento</span></div>
+    <div class="tgl-btn" id="btn-tr" onclick="setP('tr')"><span class="ti">📲</span><span class="tl">Transferencia</span><span class="ts">SPEI / CoDi</span></div>
+  </div>
+
+  <div class="trans-box" id="trans-box">
+    <div class="trans-ttl">🏦 Datos para transferencia</div>
+    <div class="trans-row"><span class="trans-lbl">Banco</span><span class="trans-val">BBVA</span></div>
+    <div class="trans-row">
+      <span class="trans-lbl">Número de tarjeta</span>
+      <span class="trans-val" id="num-tarjeta"></span>
+      <button class="trans-copy" onclick="copiar()">Copiar</button>
+    </div>
+    <div class="trans-row"><span class="trans-lbl">Titular</span><span class="trans-val">Tacos a Vapor Marus</span></div>
+    <div class="trans-nota">⚠️ Envía tu comprobante de pago por WhatsApp junto con tu pedido.</div>
+  </div>
+
+  <div class="campos-row">
+    <div class="campo"><label>Tu nombre</label><input type="text" id="nombre" placeholder="¿Cómo te llamamos?" maxlength="40" oninput="upd()"></div>
+    <div class="campo"><label>Teléfono</label><input type="tel" id="tel" placeholder="81 xxxx xxxx" maxlength="20" oninput="upd()"></div>
+  </div>
+  <div class="campo" id="campo-dir"><label>Dirección de entrega</label><textarea id="dir" placeholder="Calle, número, colonia, referencias..." oninput="upd()"></textarea></div>
+  <div class="campo"><label>Notas / Cambios en guisos (opcional)</label><input type="text" id="notas" placeholder="Ej: cambiar chicharrón por frijol, sin salsa..." maxlength="150" oninput="upd()"></div>
+
+  <div class="resumen" id="res"><div class="res-ttl">🧾 Resumen del pedido</div><div id="res-lines"></div><div class="res-total"><span>Total estimado</span><span id="res-total">$0</span></div></div>
+
+  <div class="wa-wrap">
+    <button class="wa-btn dis" id="wa-btn" onclick="enviar()">
+      <svg class="wa-ic" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Selecciona tacos para pedir
+    </button>
+    <div class="wa-hint" id="wa-hint">Agrega tacos al pedido para continuar</div>
+  </div>
+</div>
+
+<footer>
+  🌮 Tacos a Vapor Marus<br>
+  Av Nuevo León 801, Nuevo Apodaca, 66605 Ciudad Apodaca, N.L.<br>
+  Lunes a Sábado · A partir de las 7:00 a.m.<br>
+  <a href="tel:8124463948">📞 81 24 46 39 48</a>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const WA='528135950715';
+const TARJETA='4152 3142 0056 7890'; // ⚠️ Cambia por tu número real de tarjeta
+document.getElementById('num-tarjeta').textContent=TARJETA;
+const prods=[{n:'Taco de Frijol',p:10},{n:'Taco de Chicharrón',p:10},{n:'Taco de Papa',p:10},{n:'Taco de Deshebrada',p:10}];
+const qty=[0,0,0,0];
+let ent='dom',pago='ef',orden=false;
+const SVG=`<svg class="wa-ic" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+function toggleOrden(){
+  orden=!orden;
+  const btn=document.getElementById('orden-btn');
+  if(orden){qty[0]=1;qty[1]=1;qty[2]=1;qty[3]=2;[0,1,2,3].forEach(i=>document.getElementById('q'+i).textContent=qty[i]);btn.textContent='✅ Orden surtida agregada — quitar';btn.classList.add('activa');toast('✅ Orden surtida agregada')}
+  else{qty[0]=0;qty[1]=0;qty[2]=0;qty[3]=0;[0,1,2,3].forEach(i=>document.getElementById('q'+i).textContent=0);btn.textContent='➕ Agregar orden surtida';btn.classList.remove('activa')}
+  upd();
+}
+function change(id,d){
+  qty[id]=Math.max(0,qty[id]+d);
+  document.getElementById('q'+id).textContent=qty[id];
+  if(d>0&&qty[id]===1)toast('✅ '+prods[id].n+' agregado');
+  orden=false;document.getElementById('orden-btn').textContent='➕ Agregar orden surtida';document.getElementById('orden-btn').classList.remove('activa');
+  upd();
+}
+function setE(t){
+  ent=t;
+  document.getElementById('btn-dom').className='tgl-btn'+(t==='dom'?' ao':'');
+  document.getElementById('btn-loc').className='tgl-btn'+(t==='loc'?' ao':'');
+  document.getElementById('campo-dir').style.display=t==='dom'?'':'none';
+  document.getElementById('qr-box').classList.toggle('vis',t==='dom');
+  upd();
+}
+function setP(t){
+  pago=t;
+  document.getElementById('btn-ef').className='tgl-btn'+(t==='ef'?' ag':'');
+  document.getElementById('btn-tr').className='tgl-btn'+(t==='tr'?' ag':'');
+  document.getElementById('trans-box').classList.toggle('vis',t==='tr');
+  upd();
+}
+function copiar(){navigator.clipboard.writeText(TARJETA.replace(/\s/g,'')).then(()=>toast('📋 Número copiado'))}
+function upd(){
+  const total=qty.reduce((s,q,i)=>s+q*prods[i].p,0);
+  const count=qty.reduce((s,q)=>s+q,0);
+  const nom=document.getElementById('nombre').value.trim();
+  const res=document.getElementById('res');
+  const btn=document.getElementById('wa-btn');
+  const hint=document.getElementById('wa-hint');
+  if(count>0){
+    res.classList.add('vis');
+    document.getElementById('res-lines').innerHTML=qty.map((q,i)=>q>0?`<div class="res-line"><span>${q}× ${prods[i].n}</span><span>$${q*prods[i].p}</span></div>`:'').join('');
+    document.getElementById('res-total').textContent='$'+total;
+    btn.classList.remove('dis');btn.innerHTML=SVG+' Enviar pedido por WhatsApp';
+    hint.textContent=nom?`Listo ${nom}, presiona para enviar 🎉`:'Escribe tu nombre y envía tu pedido';
+  }else{
+    res.classList.remove('vis');btn.classList.add('dis');btn.innerHTML=SVG+' Selecciona tacos para pedir';hint.textContent='Agrega tacos al pedido para continuar';
+  }
+}
+function enviar(){
+  const total=qty.reduce((s,q,i)=>s+q*prods[i].p,0);
+  const count=qty.reduce((s,q)=>s+q,0);
+  if(!count)return;
+  const nom=document.getElementById('nombre').value.trim();
+  const tel=document.getElementById('tel').value.trim();
+  const dir=document.getElementById('dir').value.trim();
+  const not=document.getElementById('notas').value.trim();
+  const sal=nom?`Hola, soy *${nom}*`:'Hola';
+  const lin=qty.map((q,i)=>q>0?`• ${q}× ${prods[i].n} — $${q*prods[i].p}`:'').filter(Boolean).join('\n');
+  const te=ent==='dom'?'🛵 *Entrega a domicilio*':'🏃 *Paso a recoger al local*';
+  const tp=pago==='ef'?'💵 *Pago en efectivo*':'📲 *Pago por transferencia*';
+  let msg=`🌮 *Tacos a Vapor Marus*\n\n${sal}, quiero hacer mi pedido:\n\n${lin}\n\n💰 *Total: $${total}*\n\n${te}`;
+  if(ent==='dom'&&dir)msg+=`\n📍 Dirección: ${dir}`;
+  if(tel)msg+=`\n📞 Teléfono: ${tel}`;
+  msg+=`\n${tp}`;
+  if(pago==='tr')msg+=`\n📎 Te envío comprobante de pago.`;
+  if(ent==='dom')msg+=`\n\n🏘️ Si es en privada, te mando el código QR o clave de acceso.`;
+  if(not)msg+=`\n📝 Notas / cambios: ${not}`;
+  msg+='\n\n¿Puedes confirmar mi pedido? ¡Gracias! 😊';
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+setE('dom');setP('ef');
+</script>
+</body>
+</html>
